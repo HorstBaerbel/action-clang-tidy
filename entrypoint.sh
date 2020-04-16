@@ -1,8 +1,9 @@
-#!/bin/sh -l
+#!/bin/bash
 
 # Terminate upon errors
 set -e
 # Run cmake
+mkdir ${INPUT_SCANDIR}/${INPUT_BUILDDIR}
 pwd
 ls
 cmake -S ${INPUT_SCANDIR} -B ${INPUT_SCANDIR}/${INPUT_BUILDDIR}
