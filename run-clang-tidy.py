@@ -10,12 +10,13 @@ import os, sys, subprocess, multiprocessing
 manager = multiprocessing.Manager()
 failedfiles = manager.list()
 
+print("Arguments: " + str(sys.argv))
 sourcedir = sys.argv[1].rstrip(os.sep)
 print("Source directory: " + sourcedir)
 builddir = sourcedir + os.sep + sys.argv[2].rstrip(os.sep)
 print("Build directory: " + builddir)
 excludedirs = ()
-if sys.argv[3]:
+if sys.argv[3] and not sys.argv[3] == "":
     excludedirs = tuple([(sourcedir + os.sep + s).rstrip(os.sep) for s in sys.argv[3].split(',')])
 if not sourcedir == builddir:
     excludedirs = excludedirs + (builddir,)
