@@ -25,7 +25,7 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.scanddir }}
+    - ${{ inputs.scandir }}
     - ${{ inputs.builddir }}
     - ${{ inputs.excludedirs }}
     - ${{ inputs.extensions }}
