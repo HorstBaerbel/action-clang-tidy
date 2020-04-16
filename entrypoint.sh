@@ -7,7 +7,9 @@ set -e
 #mkdir ${INPUT_BUILDDIR}
 #cd ${INPUT_BUILDDIR}
 #cmake ${INPUT_SCANDIR}
-# does not work either
+# does not work either -> CMake Error: The source directory "/github/workspace/build" does not appear to contain CMakeLists.txt.
+pwd
+ls
 cmake -S ${INPUT_SCANDIR} -B ${INPUT_SCANDIR}/${INPUT_BUILDDIR}
 # Run tidy script
 python3 /run-clang-tidy.py ${INPUT_SCANDIR} ${INPUT_BUILDDIR} ${INPUT_EXCLUDEDIRS} ${INPUT_EXTENSIONS}
