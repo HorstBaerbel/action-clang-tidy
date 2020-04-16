@@ -3,7 +3,7 @@
 # Run clang-tidy recursively and parallel on directory
 # Usage: run-clang-tidy sourcedir builddir excludedirs extensions
 # extensions and excludedirs are specified as comma-separated 
-# string without dot, e.g. 'c,cpp'
+# string without dot, e.g. 'c,cpp' 
 # e.g. run-clang-tidy . build test,other c,cpp file
 
 import os, sys, subprocess, multiprocessing
