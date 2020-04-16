@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Runs [clang-tidy](https://clang.llvm.org/extra/clang-tidy/) and runs it recursively on files a directory reports errors using a diff. Can use a [.clang-tidy](https://clang.llvm.org/extra/clang-tidy/checks/list.html) file for style (if style: 'file').
+Runs [clang-tidy](https://clang.llvm.org/extra/clang-tidy/) recursively on files in a directory. Can use a [.clang-tidy](https://clang.llvm.org/extra/clang-tidy/checks/list.html) file to specify the checks.
 
 If you find a bug or make an improvement your pull requests are appreciated.
 
