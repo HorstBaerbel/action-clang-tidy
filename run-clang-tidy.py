@@ -10,17 +10,23 @@ import os, sys, subprocess, multiprocessing
 manager = multiprocessing.Manager()
 failedfiles = manager.list()
 
+# Get absolute current path and remove trailing seperators
+currentdir = os.path.realpath(os.getcwd()).rstrip(os.sep)
 print("Arguments: " + str(sys.argv))
-sourcedir = sys.argv[1].rstrip(os.sep)
+# Get absolute source dir after removing leading and trailing seperators from input. 
+sourcedir = currentdir + sys.argv[1].lstrip(os.sep).rstrip(os.sep)
 print("Source directory: " + sourcedir)
 builddir = sourcedir + os.sep + sys.argv[2].rstrip(os.sep)
 print("Build directory: " + builddir)
+# If exclude dirs is not empty, split it into a tuple
 excludedirs = ()
-if sys.argv[3] and not sys.argv[3] == "":
+if sys.argv[3]:
     excludedirs = tuple([(sourcedir + os.sep + s).rstrip(os.sep) for s in sys.argv[3].split(',')])
+# If the build directory is not the same as the source directory, exclude it
 if not sourcedir == builddir:
     excludedirs = excludedirs + (builddir,)
 print("Exclude directories: " + str(excludedirs))
+# Split extensions into a tuple
 extensions = tuple([("." + s) for s in sys.argv[4].split(',')])
 print("Extensions: " + str(extensions))
 

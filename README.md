@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Runs [clang-tidy](https://clang.llvm.org/extra/clang-tidy/) recursively on files in a directory. Can use a [.clang-tidy](https://clang.llvm.org/extra/clang-tidy/checks/list.html) file to specify the checks (example [.clang-tidy](.clang-tidy) file included).
+Runs [clang-tidy](https://clang.llvm.org/extra/clang-tidy/) recursively on files in a directory. Can use a [.clang-tidy](https://clang.llvm.org/extra/clang-tidy/checks/list.html) file to specify the checks (example [.clang-tidy](.clang-tidy) file included). It gets its file paths and includes from CMake build files, thus it needs to run a successful CMake configure, which in turn means you need a working CMakeLists.txt file.
 
 If you find a bug or make an improvement your pull requests are appreciated.
 
@@ -42,7 +42,7 @@ jobs:
 
 ## Parameters (optional), see action.yml
 
-* **scandir**: Directory to scan, e.g. '/bla'.
-* **builddir**: Directory to run build in, e.g. 'build'. Will automatically be excluded from the scan.
+* **scandir**: Directory to scan, e.g. 'src'. MUST be realtive to you repository, thus '.' means root of repository. MUST contain a valid CMakeLists.txt.
+* **builddir**: Directory to run CMake build in, e.g. 'build'. Will automatically be excluded from the scan. MUST be relative to scandir, thus 'build' means 'scandir/build'.
 * **excludedirs**: Directories below scandir to exclude from scanning, e.g. "test,src/third_party".
 * **extensions**: Extensions to include in scan, e.g. 'h,c,hpp,cpp'.
