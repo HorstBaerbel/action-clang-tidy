@@ -38,6 +38,7 @@ jobs:
         builddir: 'build'
         excludedirs: ''
         extensions: 'c,h,C,H,cpp,hpp,cc,hh,c++,h++,cxx,hxx'
+        cmakeoptions: ''
 ```
 
 ## Parameters (optional), see action.yml
@@ -46,3 +47,4 @@ jobs:
 * **builddir**: Directory to run CMake build in, e.g. 'build'. Will automatically be excluded from the scan. MUST be relative to scandir, thus 'build' means 'scandir/build'.
 * **excludedirs**: Directories below scandir to exclude from scanning, e.g. "test,src/third_party".
 * **extensions**: Extensions to include in scan, e.g. 'h,c,hpp,cpp'.
+* **cmakeoptions**: Pass an additional option string to cmake (will call cmake cmakeoptions scandir).

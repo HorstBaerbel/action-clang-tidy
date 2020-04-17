@@ -21,6 +21,10 @@ inputs:
     description: 'File extensions to include in check'
     required: false
     default: 'c,h,C,H,cpp,hpp,cc,hh,c++,h++,cxx,hxx'
+  cmakeoptions:
+    description: 'Additional options to pass to cmake'
+    required: false
+    default: ''
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -29,3 +33,4 @@ runs:
     - ${{ inputs.builddir }}
     - ${{ inputs.excludedirs }}
     - ${{ inputs.extensions }}
+    - ${{ inputs.cmakeoptions }}
