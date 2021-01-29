@@ -31,7 +31,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Run clang-tidy
-      uses: HorstBaerbel/action-clang-tidy@1.0
+      uses: HorstBaerbel/action-clang-tidy@1.1
       # These are optional (defaults displayed)
       with:
         scandir: '.'
