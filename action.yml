@@ -25,10 +25,36 @@ inputs:
     description: 'Additional options to pass to cmake'
     required: false
     default: ''
+  useexistingbuild:
+    description: 'Use existing build'
+    required: false
+    default: 'false'
 runs:
   using: 'composite'
   steps:
-    - uses: ./action-clang-tidy/build_within_docker
+    - if: ${{ ! inputs.useexistingbuild }}
+      shell: bash
+      run: echo 'Running cmake in docker container'
+
+    - if: ${{ ! inputs.useexistingbuild }}
+      name: 'Copy run-clang-tidy.py to dockerfile context'
+      shell: bash
+      run: cp ./action-clang-tidy/run-clang-tidy.py ./action-clang-tidy/build_within_docker/run-clang-tidy.py
+
+    - if: ${{ inputs.useexistingbuild }}
+      shell: bash
+      run: echo 'Using existing cmake configuration in ${{ inputs.builddir }} directory'
+
+    - if: ${{ inputs.useexistingbuild }}
+      uses: ./action-clang-tidy/use_existing_build
+      with:
+        scandir: ${{ inputs.scandir }}
+        builddir: ${{ inputs.builddir }}
+        excludedirs: ${{ inputs.excludedirs }}
+        extensions: ${{ inputs.extensions }}
+
+    - if: ${{ ! inputs.useexistingbuild }}
+      uses: ./action-clang-tidy/build_within_docker
       with:
         scandir: ${{ inputs.scandir }}
         builddir: ${{ inputs.builddir }}
