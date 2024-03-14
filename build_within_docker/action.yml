@@ -1,0 +1,36 @@
+name: 'Build Within Docker'
+description: 'Check repository using clang-tidy - run cmake within docker'
+author: 'HorstBaerbel / Bim Overbohm'
+branding:
+  icon: check-circle
+  color: gray-dark
+inputs:
+  scandir:
+    description: 'Scan directory'
+    required: false
+    default: '.'
+  builddir:
+    description: 'Build directory'
+    required: false
+    default: 'build'
+  excludedirs:
+    description: 'Exclude directories'
+    required: false
+    default: ''
+  extensions:
+    description: 'File extensions to include in check'
+    required: false
+    default: 'c,h,C,H,cpp,hpp,cc,hh,c++,h++,cxx,hxx'
+  cmakeoptions:
+    description: 'Additional options to pass to cmake'
+    required: false
+    default: ''
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.scandir }}
+    - ${{ inputs.builddir }}
+    - ${{ inputs.excludedirs }}
+    - ${{ inputs.extensions }}
+    - ${{ inputs.cmakeoptions }}
