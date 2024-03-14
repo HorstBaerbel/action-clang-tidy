@@ -1,5 +1,5 @@
-name: 'action-clang-tidy'
-description: 'Check repository using clang-tidy'
+name: 'Build Within Docker'
+description: 'Check repository using clang-tidy - run cmake within docker'
 author: 'HorstBaerbel / Bim Overbohm'
 branding:
   icon: check-circle
@@ -26,12 +26,11 @@ inputs:
     required: false
     default: ''
 runs:
-  using: 'composite'
-  steps:
-    - uses: ./action-clang-tidy/build_within_docker
-      with:
-        scandir: ${{ inputs.scandir }}
-        builddir: ${{ inputs.builddir }}
-        excludedirs: ${{ inputs.excludedirs }}
-        extensions: ${{ inputs.extensions }}
-        cmakeoptions: ${{ inputs.cmakeoptions }}
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.scandir }}
+    - ${{ inputs.builddir }}
+    - ${{ inputs.excludedirs }}
+    - ${{ inputs.extensions }}
+    - ${{ inputs.cmakeoptions }}
